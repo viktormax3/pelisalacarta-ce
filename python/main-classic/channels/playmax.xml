@@ -6,9 +6,14 @@
 	<active>true</active>
 	<adult>false</adult>
 
-	<version>6</version>
+	<version>7</version>
 
 	<changes>
+		<change>
+			<date>27/07/2017</date>
+			<autor>1k2g962r</autor>
+			<description>Fixes rápidos</description>
+		</change>
 		<change>
 			<date>17/04/2017</date>
 			<autor></autor>

@@ -19,7 +19,7 @@ from core import scrapertools
 from core.item import Item
 from core.tmdb import Tmdb
 
-host = "http://www.mejortorrent.com"
+host = "http://www.mejortorrent.wesconference.com"
 
 
 def mainlist(item):
@@ -35,12 +35,12 @@ def mainlist(item):
     thumb_docus = get_thumbnail("thumb_canales_documentales.png")
     thumb_buscar = get_thumbnail("thumb_buscar.png")
 
-    itemlist.append( Item(channel=item.channel, title="Peliculas" , action="getlist", url="http://www.mejortorrent.com/torrents-de-peliculas.html", thumbnail=thumb_pelis ))
-    itemlist.append( Item(channel=item.channel, title="Peliculas HD" , action="getlist", url="http://www.mejortorrent.com/torrents-de-peliculas-hd-alta-definicion.html", thumbnail=thumb_pelis_hd ))
-    itemlist.append( Item(channel=item.channel, title="Series" , action="getlist", url="http://www.mejortorrent.com/torrents-de-series.html", thumbnail=thumb_series ))
-    itemlist.append( Item(channel=item.channel, title="Series HD" , action="getlist"           , url="http://www.mejortorrent.com/torrents-de-series-hd-alta-definicion.html", thumbnail=thumb_series_hd ))
-    itemlist.append( Item(channel=item.channel, title="Series Listado Alfabetico" , action="listalfabetico"           , url="http://www.mejortorrent.com/torrents-de-series.html", thumbnail=thumb_series_az ))
-    itemlist.append( Item(channel=item.channel, title="Documentales" , action="getlist"           , url="http://www.mejortorrent.com/torrents-de-documentales.html", thumbnail=thumb_docus ))
+    itemlist.append( Item(channel=item.channel, title="Peliculas" , action="getlist", url="http://www.mejortorrent.wesconference.com/torrents-de-peliculas.html", thumbnail=thumb_pelis ))
+    itemlist.append( Item(channel=item.channel, title="Peliculas HD" , action="getlist", url="http://www.mejortorrent.wesconference.com/torrents-de-peliculas-hd-alta-definicion.html", thumbnail=thumb_pelis_hd ))
+    itemlist.append( Item(channel=item.channel, title="Series" , action="getlist", url="http://www.mejortorrent.wesconference.com/torrents-de-series.html", thumbnail=thumb_series ))
+    itemlist.append( Item(channel=item.channel, title="Series HD" , action="getlist"           , url="http://www.mejortorrent.wesconference.com/torrents-de-series-hd-alta-definicion.html", thumbnail=thumb_series_hd ))
+    itemlist.append( Item(channel=item.channel, title="Series Listado Alfabetico" , action="listalfabetico"           , url="http://www.mejortorrent.wesconference.com/torrents-de-series.html", thumbnail=thumb_series_az ))
+    itemlist.append( Item(channel=item.channel, title="Documentales" , action="getlist"           , url="http://www.mejortorrent.wesconference.com/torrents-de-documentales.html", thumbnail=thumb_docus ))
     itemlist.append( Item(channel=item.channel, title="Buscar..." , action="search", thumbnail=thumb_buscar ))
 
     return itemlist

@@ -35,12 +35,12 @@ def mainlist(item):
     thumb_docus = get_thumbnail("thumb_canales_documentales.png")
     thumb_buscar = get_thumbnail("thumb_buscar.png")
 
-    itemlist.append( Item(channel=item.channel, title="Peliculas" , action="getlist", url="http://www.mejortorrent.wesconference.com/torrents-de-peliculas.html", thumbnail=thumb_pelis ))
-    itemlist.append( Item(channel=item.channel, title="Peliculas HD" , action="getlist", url="http://www.mejortorrent.wesconference.com/torrents-de-peliculas-hd-alta-definicion.html", thumbnail=thumb_pelis_hd ))
-    itemlist.append( Item(channel=item.channel, title="Series" , action="getlist", url="http://www.mejortorrent.wesconference.com/torrents-de-series.html", thumbnail=thumb_series ))
-    itemlist.append( Item(channel=item.channel, title="Series HD" , action="getlist"           , url="http://www.mejortorrent.wesconference.com/torrents-de-series-hd-alta-definicion.html", thumbnail=thumb_series_hd ))
-    itemlist.append( Item(channel=item.channel, title="Series Listado Alfabetico" , action="listalfabetico"           , url="http://www.mejortorrent.wesconference.com/torrents-de-series.html", thumbnail=thumb_series_az ))
-    itemlist.append( Item(channel=item.channel, title="Documentales" , action="getlist"           , url="http://www.mejortorrent.wesconference.com/torrents-de-documentales.html", thumbnail=thumb_docus ))
+    itemlist.append( Item(channel=item.channel, title="Peliculas" , action="getlist", url="https://www.mejortorrent.wesconference.com/torrents-de-peliculas.html", thumbnail=thumb_pelis ))
+    itemlist.append( Item(channel=item.channel, title="Peliculas HD" , action="getlist", url="https://www.mejortorrent.wesconference.com/torrents-de-peliculas-hd-alta-definicion.html", thumbnail=thumb_pelis_hd ))
+    itemlist.append( Item(channel=item.channel, title="Series" , action="getlist", url="https://www.mejortorrent.wesconference.com/torrents-de-series.html", thumbnail=thumb_series ))
+    itemlist.append( Item(channel=item.channel, title="Series HD" , action="getlist"           , url="https://www.mejortorrent.wesconference.com/torrents-de-series-hd-alta-definicion.html", thumbnail=thumb_series_hd ))
+    itemlist.append( Item(channel=item.channel, title="Series Listado Alfabetico" , action="listalfabetico"           , url="https://www.mejortorrent.wesconference.com/torrents-de-series.html", thumbnail=thumb_series_az ))
+    itemlist.append( Item(channel=item.channel, title="Documentales" , action="getlist"           , url="https://www.mejortorrent.wesconference.com/torrents-de-documentales.html", thumbnail=thumb_docus ))
     itemlist.append( Item(channel=item.channel, title="Buscar..." , action="search", thumbnail=thumb_buscar ))
 
     return itemlist
@@ -51,9 +51,9 @@ def listalfabetico(item):
     itemlist = []
 
     for letra in ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']:
-        itemlist.append( Item(channel=item.channel, action="getlist" , title=letra, url="http://www.mejortorrent.wesconference.com/series-letra-" + letra.lower() + ".html"))
+        itemlist.append( Item(channel=item.channel, action="getlist" , title=letra, url="https://www.mejortorrent.wesconference.com/series-letra-" + letra.lower() + ".html"))
 
-    itemlist.append( Item(channel=item.channel, action="getlist" , title="Todas",url="http://www.mejortorrent.wesconference.com/series-letra..html"))
+    itemlist.append( Item(channel=item.channel, action="getlist" , title="Todas",url="https://www.mejortorrent.wesconference.com/series-letra..html"))
 
     return itemlist
 
@@ -62,7 +62,7 @@ def search(item,texto):
     logger.info()
     texto = texto.replace(" ","+")
 
-    item.url = "http://www.mejortorrent.wesconference.com/secciones.php?sec=buscador&valor=%s" % (texto)
+    item.url = "https://www.mejortorrent.wesconference.com/secciones.php?sec=buscador&valor=%s" % (texto)
     try:
         return buscador(item)
 
@@ -257,8 +257,8 @@ def episodios(item):
     tabla = scrapertools.get_match(data,"<input type='hidden' name='tabla' value='([^']+)'>")
     titulo = scrapertools.get_match(data,"<input type='hidden' name='titulo' value='([^']+)'>")
 
-    item.thumbnail = scrapertools.find_single_match(data, "src='http://www\.mejortorrent.wesconference\.com(/uploads/imagenes/" + tabla + "/[a-zA-Z0-9_ ]+.jpg)'")
-    item.thumbnail = 'http://www.mejortorrent.wesconference.com' + urllib.quote(item.thumbnail)
+    item.thumbnail = scrapertools.find_single_match(data, "src='https://www\.mejortorrent.wesconference\.com(/uploads/imagenes/" + tabla + "/[a-zA-Z0-9_ ]+.jpg)'")
+    item.thumbnail = 'https://www.mejortorrent.wesconference.com' + urllib.quote(item.thumbnail)
 
     #<form name='episodios' action='secciones.php?sec=descargas&ap=contar_varios' method='post'>
     data = scrapertools.get_match(data,"<form name='episodios' action='secciones.php\?sec=descargas\&ap=contar_varios' method='post'>(.*?)</form>")
@@ -297,7 +297,7 @@ def episodios(item):
 
         title = scrapedtitle + " (" + fecha + ")"
 
-        url = "http://www.mejortorrent.wesconference.com/secciones.php?sec=descargas&ap=contar_varios"
+        url = "https://www.mejortorrent.wesconference.com/secciones.php?sec=descargas&ap=contar_varios"
         #"episodios%5B1%5D=11744&total_capis=5&tabla=series&titulo=Sea+Patrol+-+2%AA+Temporada"
         post = urllib.urlencode( { name:value , "total_capis":total_capis , "tabla":tabla , "titulo":titulo } )
         logger.debug("post="+post)
@@ -399,7 +399,7 @@ def play(item):
 
         params = dict(urlparse.parse_qsl(item.extra))
 
-        patron = '<a href="(http://www.mejortorrent.wesconference.com/uploads/torrents/' + params["tabla"] +'/.*?\.torrent)"'
+        patron = '<a href="(https://www.mejortorrent.wesconference.com/uploads/torrents/' + params["tabla"] +'/.*?\.torrent)"'
 
         link = scrapertools.get_match(data, patron)
 

@@ -11,7 +11,7 @@
 	<changes>
 		<change>
 			<date>1/08/2017</date>
-			<autor>darkozma</autor>
+			<autor>devalls</autor>
 			<description>Update_URL changed</description>
 		</change>
 		<change>
@@ -43,8 +43,8 @@
 
 	<fanart></fanart>
 	<thumbnail>http://i.imgur.com/X5Z40kT.png</thumbnail>
-	<bannermenu>https://raw.githubusercontent.com/pelisalacarta-ce/media/master/pelisalacarta/bannermenu/playmax.png</bannermenu>
-	<update_url>https://raw.githubusercontent.com/darkozma/pelisalacarta-ce/master/python/main-classic/channels/</update_url>
+	<bannermenu>https://raw.githubusercontent.com/devalls/media/master/pelisalacarta/bannermenu/playmax.png</bannermenu>
+	<update_url>https://raw.githubusercontent.com/devalls/pelisalacarta-ce/master/python/main-classic/channels/</update_url>
 
 	<categories>
 		<category>movie</category>

@@ -42,7 +42,7 @@
 	</changes>
 
 	<fanart></fanart>
-	<thumbnail>http://i.imgur.com/X5Z40kT.png</thumbnail>
+	<thumbnail>https://raw.githubusercontent.com/devalls/media/master/pelisalacarta/squares/playmax.png</thumbnail>
 	<bannermenu>https://raw.githubusercontent.com/devalls/media/master/pelisalacarta/bannermenu/playmax.png</bannermenu>
 	<update_url>https://raw.githubusercontent.com/devalls/pelisalacarta-ce/master/python/main-classic/channels/</update_url>
 

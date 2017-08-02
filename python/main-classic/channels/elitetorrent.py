@@ -11,21 +11,21 @@ from core import logger
 from core import scrapertools
 from core.item import Item
 
-BASE_URL = 'http://www.elitetorrent.wesconference.net'
+BASE_URL = 'https://www.elitetorrent.wesconference.net'
 
 
 def mainlist(item):
     logger.info()
 
     itemlist = []
-    itemlist.append( Item(channel=item.channel, title="Docus y TV"     , action="peliculas", url="http://www.elitetorrent.wesconference.net/categoria/6/docus-y-tv/modo:mini", viewmode="movie_with_plot"))
-    itemlist.append( Item(channel=item.channel, title="Estrenos"       , action="peliculas", url="http://www.elitetorrent.wesconference.net/categoria/1/estrenos/modo:mini", viewmode="movie_with_plot"))
-    itemlist.append( Item(channel=item.channel, title="Películas"      , action="peliculas", url="http://www.elitetorrent.wesconference.net/categoria/2/peliculas/modo:mini", viewmode="movie_with_plot"))
-    itemlist.append( Item(channel=item.channel, title="Peliculas HDRip", action="peliculas", url="http://www.elitetorrent.wesconference.net/categoria/13/peliculas-hdrip/modo:mini", viewmode="movie_with_plot"))
-    itemlist.append( Item(channel=item.channel, title="Peliculas MicroHD", action="peliculas", url="http://www.elitetorrent.wesconference.net/categoria/17/peliculas-microhd/modo:mini", viewmode="movie_with_plot"))
-    itemlist.append( Item(channel=item.channel, title="Peliculas VOSE" , action="peliculas", url="http://www.elitetorrent.wesconference.net/categoria/14/peliculas-vose/modo:mini", viewmode="movie_with_plot"))
-    itemlist.append( Item(channel=item.channel, title="Series"         , action="peliculas", url="http://www.elitetorrent.wesconference.net/categoria/4/series/modo:mini", viewmode="movie_with_plot"))
-    itemlist.append( Item(channel=item.channel, title="Series VOSE"    , action="peliculas", url="http://www.elitetorrent.wesconference.net/categoria/16/series-vose/modo:mini", viewmode="movie_with_plot"))
+    itemlist.append( Item(channel=item.channel, title="Docus y TV"     , action="peliculas", url="https://www.elitetorrent.wesconference.net/categoria/6/docus-y-tv/modo:mini", viewmode="movie_with_plot"))
+    itemlist.append( Item(channel=item.channel, title="Estrenos"       , action="peliculas", url="https://www.elitetorrent.wesconference.net/categoria/1/estrenos/modo:mini", viewmode="movie_with_plot"))
+    itemlist.append( Item(channel=item.channel, title="Películas"      , action="peliculas", url="https://www.elitetorrent.wesconference.net/categoria/2/peliculas/modo:mini", viewmode="movie_with_plot"))
+    itemlist.append( Item(channel=item.channel, title="Peliculas HDRip", action="peliculas", url="https://www.elitetorrent.wesconference.net/categoria/13/peliculas-hdrip/modo:mini", viewmode="movie_with_plot"))
+    itemlist.append( Item(channel=item.channel, title="Peliculas MicroHD", action="peliculas", url="https://www.elitetorrent.wesconference.net/categoria/17/peliculas-microhd/modo:mini", viewmode="movie_with_plot"))
+    itemlist.append( Item(channel=item.channel, title="Peliculas VOSE" , action="peliculas", url="https://www.elitetorrent.wesconference.net/categoria/14/peliculas-vose/modo:mini", viewmode="movie_with_plot"))
+    itemlist.append( Item(channel=item.channel, title="Series"         , action="peliculas", url="https://www.elitetorrent.wesconference.net/categoria/4/series/modo:mini", viewmode="movie_with_plot"))
+    itemlist.append( Item(channel=item.channel, title="Series VOSE"    , action="peliculas", url="https://www.elitetorrent.wesconference.net/categoria/16/series-vose/modo:mini", viewmode="movie_with_plot"))
 
     return itemlist
 

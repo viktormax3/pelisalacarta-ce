@@ -8,15 +8,21 @@
 	<language>es</language>
 
 	<fanart></fanart>
-	<thumbnail>https://raw.githubusercontent.com/pelisalacarta-ce/pelisalacarta-ce/media/pelisalacarta/squares/plusdede.png</thumbnail>
-	<bannermenu>https://raw.githubusercontent.com/pelisalacarta-ce/pelisalacarta-ce/media/pelisalacarta/bannermenu/plusdede.png</bannermenu>
+	<thumbnail>https://raw.githubusercontent.com/darkozma/media/master/pelisalacarta/squares/plusdede.png</thumbnail>
+	<bannermenu>https://raw.githubusercontent.com/darkozma/media/master/pelisalacarta/bannermenu/plusdede.png</bannermenu>
 
-	<update_url>https://raw.githubusercontent.com/pelisalacarta-ce/pelisalacarta-ce/master/python/main-classic/channels/</update_url>
-	<version>1</version>
+	<update_url>https://raw.githubusercontent.com/darkozma/pelisalacarta-ce/master/python/main-classic/channels/</update_url>
+	<version>2</version>
 	<changes>
 		<change>
+			<date>1/08/2017</date>
+			<autor>darkozma</autor>
+			<description>Update_URL changed</description>
+		</change>
+		<change>
 			<date>12/07/2017</date>
-			<autor></autor>
+			<autor>Willyn</autor>
+			<description>Portada version de Pordede (realizada por Cmos)</description>
 		</change>
 		
 	</changes>

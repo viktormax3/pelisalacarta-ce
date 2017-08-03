@@ -8,13 +8,18 @@
 	<language>es</language>
 
 	<fanart></fanart>
-	<thumbnail>https://raw.githubusercontent.com/pelisalacarta-ce/media/master/pelisalacarta/squares/elitetorrent.png</thumbnail>
-	<bannermenu>https://raw.githubusercontent.com/pelisalacarta-ce/media/master/pelisalacarta/bannermenu/elitetorrent.png</bannermenu>
+	<thumbnail>https://raw.githubusercontent.com/devalls/media/master/pelisalacarta/squares/elitetorrent.png</thumbnail>
+	<bannermenu>https://raw.githubusercontent.com/devalls/media/master/pelisalacarta/bannermenu/elitetorrent.png</bannermenu>
 
-	<update_url>https://raw.githubusercontent.com/pelisalacarta-ce/pelisalacarta-ce/master/python/main-classic/channels/</update_url>
-	<version>2</version>
+	<update_url>https://raw.githubusercontent.com/devalls/pelisalacarta-ce/master/python/main-classic/channels/</update_url>
+	<version>3</version>
 
 	<changes>
+		<change>
+			<date>2/08/2017</date>
+			<autor>devalls</autor>
+			<description>modificar update_url y arreglada url canal</description>
+		</change>
 		<change>
 			<date>15/03/2017</date>
 			<autor></autor>

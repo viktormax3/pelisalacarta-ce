@@ -56,8 +56,9 @@ def login():
 
         confirm_id = scrapertools.find_single_match(data, 'name="confirm_id" value="([^"]+)"')
         sid_log = scrapertools.find_single_match(data, 'name="sid" value="([^"]+)"')
+
         post = "username=%s&password=%s&autologin=on&agreed=true&change_lang=0&confirm_id=%s&login=&sid=%s" \
-               "&redirect=index.php&login=Entrar" % (user, password, confirm_id, sid_log)
+               "&redirect=index.php" % (user, password, confirm_id, sid_log)
         data = httptools.downloadpage("https://playmax.mx/ucp.php?mode=login", post=post).data
         if "contraseña incorrecta" in data:
             logger.error("Error en el login")
@@ -142,9 +143,10 @@ def busqueda(item):
     itemlist = []
 
     data = httptools.downloadpage(item.url).data
-    data = json.Xml2Json(data).result
+    data = json.xmlTojson(None, data)
 
     for f in data["Data"]["Fichas"]["Ficha"]:
+        f['Title'] =  scrapertools.find_single_match(f['Title'], '<!\[CDATA\[(.+?)\]\]>')
         title = "%s  (%s)" % (f["Title"], f["Year"])
         infolab = {'year': f["Year"]}
         thumbnail = f["Poster"]
@@ -301,7 +303,7 @@ def fichas(item):
     data = httptools.downloadpage(item.url).data
 
     fichas_marca = {'1': 'Siguiendo', '2': 'Pendiente', '3': 'Favorita', '4': 'Vista', '5': 'Abandonada'}
-    patron = '<div class="c_fichas_image">.*?href="\.([^"]+)".*?src="\.([^"]+)".*?' \
+    patron = '<div class="c_fichas_image".*?href="\.([^"]+)".*?src-data="\.([^"]+)".*?' \
              '<div class="c_fichas_data".*?marked="([^"]*)".*?serie="([^"]*)".*?' \
              '<div class="c_fichas_title">(?:<div class="c_fichas_episode">([^<]+)</div>|)([^<]+)</div>'
     matches = scrapertools.find_multiple_matches(data, patron)
@@ -311,6 +313,7 @@ def fichas(item):
         if not "-dc=" in scrapedurl:
             scrapedurl += "-dc="
         scrapedthumbnail = host + scrapedthumbnail
+
         action = "findvideos"
         if __menu_info__:
             action = "menu_info"
@@ -433,7 +436,7 @@ def episodios(item):
                 import traceback
                 logger.error(traceback.format_exc())
                 pass
-        
+
         itemlist.append(item.clone(action="add_serie_to_library", title=title, text_color=color5,
                                    extra="episodios###library"))
     if itemlist and not __menu_info__:
@@ -451,7 +454,7 @@ def findvideos(item):
         # Descarga la página
         data = httptools.downloadpage(item.url).data
         data = re.sub(r"\n|\r|\t|\s{2}|&nbsp;|<br>", "", data)
-        
+
         if not item.infoLabels["tmdb_id"]:
             item.infoLabels["tmdb_id"] = scrapertools.find_single_match(data, '<a href="https://www.themoviedb.org/'
                                                                               '[^/]+/(\d+)')
@@ -474,7 +477,7 @@ def findvideos(item):
 
     url = "https://playmax.mx/c_enlaces_n.php?apikey=%s&sid=%s&ficha=%s&cid=%s" % (apikey, sid, ficha, cid)
     data = httptools.downloadpage(url).data
-    data = json.Xml2Json(data).result
+    data = json.xmlTojson(None, data)
 
     for k, v in data["Data"].items():
         try:
@@ -540,7 +543,7 @@ def findvideos(item):
 
     if not itemlist:
         itemlist.append(item.clone(action="", title="No hay enlaces disponibles"))
-            
+
     return itemlist
 
 
@@ -623,7 +626,7 @@ def menu_info(item):
 
     itemlist.extend(acciones_fichas(item, sid, ficha, season=True))
     itemlist.append(item.clone(action="acciones_cuenta", title="Añadir a una lista", text_color=color3, ficha=ficha))
-    
+
     return itemlist
 
 
@@ -634,7 +637,7 @@ def acciones_fichas(item, sid, ficha, season=False):
     estados = [{'following': 'seguir'}, {'favorite': 'favorita'}, {'view': 'vista'}, {'slope': 'pendiente'}]
     url = "https://playmax.mx/ficha.php?apikey=%s&sid=%s&f=%s" % (apikey, sid, ficha)
     data = httptools.downloadpage(url).data
-    data = json.Xml2Json(data).result
+    data = json.xmlTojson(None, data)
 
     try:
         marked = data["Data"]["User"]["Marked"]
@@ -685,7 +688,7 @@ def acciones_fichas(item, sid, ficha, season=False):
                     continue
                 elif type(v["Item"]) is not list:
                     v["Item"] = [v["Item"]]
-                    
+
                 for epi in v["Item"]:
                     if epi["EpisodeViewed"] == "no":
                         vistos = True
@@ -716,7 +719,7 @@ def acciones_cuenta(item):
         return itemlist
     elif "Añadir a una lista" in item.title:
         data = httptools.downloadpage(host+"/c_listas.php?apikey=%s&sid=%s" % (apikey, sid)).data
-        data = json.Xml2Json(data).result
+        data = json.xmlTojson(None, data)
         itemlist.append(item.clone(title="Crear nueva lista", folder=False))
         if data["Data"]["TusListas"] != "\t":
             import random
@@ -725,6 +728,8 @@ def acciones_cuenta(item):
                 data = [data]
             for child in data:
                 image = ""
+                
+                child['Title'] =  scrapertools.find_single_match(child['Title'], '<!\[CDATA\[(.+?)\]\]>')
                 title = "%s (%s fichas)" % (child["Title"], child["FichasInList"])
                 images = []
                 for i in range(1, 5):
@@ -761,7 +766,7 @@ def acciones_cuenta(item):
         platformtools.dialog_notification("Ficha añadida a la lista", "Lista: %s" % item.title)
         platformtools.itemlist_refresh()
         return
-        
+
     data = httptools.downloadpage("https://playmax.mx/tusfichas.php").data
     data = re.sub(r"\n|\r|\t|\s{2}|&nbsp;|<br>", "", data)
 
@@ -770,7 +775,7 @@ def acciones_cuenta(item):
     for category, contenido in matches:
         itemlist.append(item.clone(action="", title=category, text_color=color3))
 
-        patron = '<div class="c_fichas_image">.*?href="\.([^"]+)".*?src="\.([^"]+)".*?serie="([^"]*)".*?' \
+        patron = '<div class="c_fichas_image".*?href="\.([^"]+)".*?src="\.([^"]+)".*?serie="([^"]*)".*?' \
                  '<div class="c_fichas_title">(?:<div class="c_fichas_episode">([^<]+)</div>|)([^<]+)</div>'
         entradas = scrapertools.find_multiple_matches(contenido, patron)
         for scrapedurl, scrapedthumbnail, serie, episodio, scrapedtitle in entradas:
@@ -844,7 +849,7 @@ def listas(item):
     itemlist = []
 
     data = httptools.downloadpage(item.url).data
-    data = json.Xml2Json(data).result
+    data = json.xmlTojson(None, data)
     if item.extra == "listas":
         itemlist.append(Item(channel=item.channel, title="Listas más seguidas", action="listas", text_color=color1,
                              url=item.url+"&orden=1", extra="listas_plus"))
@@ -873,6 +878,8 @@ def listas(item):
     import random
     for child in data:
         image = ""
+
+        child['Title'] =  scrapertools.find_single_match(child['Title'], '<!\[CDATA\[(.+?)\]\]>')
         title = "%s (%s fichas)" % (child["Title"], child["FichasInList"])
         images = []
         for i in range(1, 5):
